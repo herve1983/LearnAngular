@@ -5,13 +5,14 @@ import {UserAuth} from "../model/user-auth";
 import {BehaviorSubject, Observable} from "rxjs";
 import {map, tap} from "rxjs/operators";
 import {SessionStorageService} from "./session-storage.service";
+import {Constants} from "../util/Constants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private LOGIN_URL = `${BASE_URL}/user/login`;
+  private LOGIN_URL = `${Constants.BASE_URL}/user/login`;
 
   private _userAuth$ = new BehaviorSubject(this.storageService.getToken());
   public readonly userAuthObs$ = this._userAuth$.asObservable();

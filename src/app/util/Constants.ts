@@ -1,5 +1,3 @@
-const BASE_URL = `localhost:8080/api/`;
-
-module.exports = {
-  BASE_URL,
-};
+export class Constants {
+  public static BASE_URL = `localhost:8080/api/`;
+}
