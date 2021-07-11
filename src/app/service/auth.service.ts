@@ -6,6 +6,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {map, tap} from "rxjs/operators";
 import {SessionStorageService} from "./session-storage.service";
 import {Constants} from "../util/Constants";
+import {User} from "../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import {Constants} from "../util/Constants";
 export class AuthService {
 
   private LOGIN_URL = `${Constants.BASE_URL}/user/login`;
+  private REGISTER_URL = `${Constants.BASE_URL}/user/register`;
 
   private _userAuth$ = new BehaviorSubject(this.storageService.getToken());
   public readonly userAuthObs$ = this._userAuth$.asObservable();
@@ -27,5 +29,9 @@ export class AuthService {
   login(userLogin: UserLogin): Observable<UserAuth> {
     return this.http.post<UserAuth>(this.LOGIN_URL, userLogin)
       .pipe(tap(userAuth => this.storageService.saveToken(userAuth)));
+  }
+
+  register(user: User) {
+    return this.http.post<User>(this.REGISTER_URL, user);
   }
 }
