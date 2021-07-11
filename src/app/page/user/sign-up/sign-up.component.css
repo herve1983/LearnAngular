@@ -1,0 +1,39 @@
+form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 550px;
+}
+
+fieldset {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 15px;
+  background-color: #e4e4e4;
+}
+
+fieldset input, button {
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+/* Center inout placeholder*/
+form, input {
+  text-align: center;
+}
+
+button {
+  width: 100%;
+}
+
+/*
+
+Center an element in the middle of the screen using translate:
+https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page
+
+center input placeholder:
+https://stackoverflow.com/questions/7381446/center-html-input-text-field-placeholder
+*/
