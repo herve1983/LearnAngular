@@ -37,6 +37,35 @@
         Enter a correct Email
       </div>
     </div>
+    <div formGroupName="address" class="col-12 mb-3">
+      <h3>Address</h3>
+      <div class="row">
+        <div class="col-6 mb-3">
+          <input id="street" type="text" formControlName="street" placeholder="Enter Street">
+          <div *ngIf="errorByFormGroupName('address', 'street','required')">
+            This field cannot be empty
+          </div>
+        </div>
+        <div class="col-6 mb-3">
+          <input id="number" type="text" formControlName="number" placeholder="Enter number">
+          <div *ngIf="errorByControlName('address.number','required')">
+            This field cannot be empty
+          </div>
+        </div>
+        <div class="col-6 mb-3">
+          <input id="zip" type="text" formControlName="zip" placeholder="Enter Zip">
+          <div *ngIf="errorByControlName('address.zip','required')">
+            This field cannot be empty
+          </div>
+        </div>
+        <div class="col-6 mb-3">
+          <input id="city" type="text" formControlName="city" placeholder="Enter city">
+          <div *ngIf="errorByControlName('address.city','required')">
+            This field cannot be empty
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-12 mb-3">
       <div class="row justify-content-center">
         <div class="col">

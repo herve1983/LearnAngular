@@ -16,6 +16,9 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    console.log(this.signupForm.get('address'))
+    console.log(this.signupForm)
   }
 
   private initForm() {
@@ -26,23 +29,37 @@ export class SignUpComponent implements OnInit {
       password: ['', [Validators.required]],
       passwordConfirm: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
+      address: this.fb.group({
+        street: ['', [Validators.required]],
+        number: ['', [Validators.required]],
+        zip: ['', [Validators.required]],
+        city: ['', [Validators.required]]
+      })
     });
   }
 
   errorByControlName(controlName: string, error: string) {
-    const control = this.signupForm.controls[controlName];
-    return control.hasError(error) && (control.touched || control.dirty);
+    const control = this.signupForm.get(controlName);
+    return control?.hasError(error) && (control?.touched || control?.dirty);
+  }
+
+  /**
+   * return true if a field validator is triggered otherwise return false. See an exemple in the address street input field.
+   * @param formGroupName nested formgroup name
+   * @param controlName formcontrol name
+   * @param error validator error
+   */
+  errorByFormGroupName(formGroupName: string, controlName: string, error: string) {
+    const controls = this.signupForm.controls;
+    if (controls[formGroupName] instanceof FormGroup) {
+      return controls[formGroupName].get(controlName)?.hasError(error) &&
+        (controls[formGroupName].get(controlName)?.touched || controls[formGroupName].get(controlName)?.dirty)
+    }
+    return this.errorByControlName(controlName, error);
   }
 
   onSubmit() {
-    const user: User = {
-      id: -1,
-      firstName: this.signupForm.controls['firstName'].value,
-      lastName: this.signupForm.controls['lastName'].value,
-      username: this.signupForm.controls['username'].value,
-      password: this.signupForm.controls['password'].value,
-      email: this.signupForm.controls['email'].value
-    };
+    const user: User = this.signupForm.value;
 
     console.log(user)
 
